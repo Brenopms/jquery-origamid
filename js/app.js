@@ -1,4 +1,4 @@
-//debounce para aumentar a otimização
+//debounce for otimization
 
 debounce = function(func, wait, immediate) {
 	var timeout;
@@ -17,7 +17,7 @@ debounce = function(func, wait, immediate) {
 
 
 
-// Mudar tab ao click
+// Change tab
 $('[data-group]').each(function(){
 	var $allTarget = $(this).find('[data-target]'),
 			$allClick = $(this).find('[data-click]'),
@@ -40,7 +40,42 @@ $('[data-group]').each(function(){
 	});
 });
 
-//Scroll Suave para link interno
+// //ES6 - Change tab
+// const activeClass = 'active';
+// const dataClickFirst = document.querySelectorAll('[data-click].first');
+// const dataTargetFirst = document.querySelectorAll('[data-target].first');
+// const dataClickAll= document.querySelectorAll('[data-click]');
+
+// dataClickFirst.forEach(clk => {
+// 	clk.classList.add(activeClass);
+// });
+
+// dataTargetFirst.forEach(tgt => {
+// 	tgt.classList.add(activeClass);
+// });
+
+// dataClickAll.forEach(dataClick => {
+// 	dataClick.addEventListener('click', function(e){
+// 		e.preventDefault();
+
+// 		//Remove class of all targets in the group
+// 		let datasetGroup = this.dataset.group;
+// 		const targetRemove = document.querySelectorAll(`[data-group=${datasetGroup}]`);
+// 		targetRemove.forEach(tgt => {
+// 			tgt.classList.remove(activeClass);
+// 		});
+
+// 		//Find and add class
+// 		let datasetClick = this.dataset.click;
+// 		const target = document.querySelector(`[data-target=${datasetClick}]`);
+// 		target.classList.add(activeClass);
+// 		dataClick.classList.add(activeClass);
+
+// 	})
+// });
+
+
+//Smooth scroll to internal link
 $('.menu-nav a[href^="#"]').click(function(e){
 	e.preventDefault();
 	var id = $(this).attr('href'),
@@ -51,7 +86,7 @@ $('.menu-nav a[href^="#"]').click(function(e){
 	}, 500);
 });
 
-//Scroll suave para o top
+//Smooth scroll to the top
 $('.logo').click(function(e){
 	e.preventDefault();
 	$('html, body').animate({
@@ -59,7 +94,7 @@ $('.logo').click(function(e){
 	}, 500)
 });
 
-//mudar para a active de acordo com a seção
+//mChanging active state according to the section
 $('section').each(function(){
 	var height = $(this).height(),
 			offsetTop = $(this).offset().top,
@@ -77,7 +112,7 @@ $('section').each(function(){
 	}, 100));
 });
 
-//botao do menu mobile
+//Mobile button
 $('.mobile-btn').click(function(){
 	$(this).toggleClass('active');
 	$('.mobile-menu').toggleClass('active');
@@ -86,7 +121,7 @@ $('.mobile-btn').click(function(){
 
 $('.slide > :first').addClass('active');
 
-//slide
+//slider
 (function(){
 	function slider(sliderName, velocidade){
 		var sliderClass = '.' + sliderName,
@@ -120,7 +155,38 @@ $('.slide > :first').addClass('active');
 	slider('introducao', 2000);
 })();
 
-//animação ao Scroll
+
+// // ES6  - Slider
+// (function(){
+// function slider(sliderName, velocidade) {
+// 	var sliderClass = '.' + sliderName,
+// 			activeClass = 'active',
+// 			rotate = setInterval(rotateSlide, velocidade);
+
+// 	$(sliderClass + ' > :first').addClass(activeClass);
+
+// 	$(sliderClass).hover(function(){
+// 		clearInterval(rotate);
+// 	}, function() {
+// 		rotate = setInterval(rotateSlide, velocidade);
+// 	});
+
+// 	function rotateSlide() {
+// 		var activeSlide = $(sliderClass + ' > .' + activeClass),
+// 				nextSlide = activeSlide.next();
+
+// 		if(nextSlide.length == 0) {
+// 			nextSlide = $(sliderClass + ' > :first');
+// 		}
+// 		activeSlide.removeClass(activeClass);
+// 		nextSlide.addClass(activeClass);
+// 	}
+// }
+
+// slider('introducao', 2000);
+// })();
+
+//Scroll animation
 
 (function(){ //restrigindo ao escopo
 
@@ -148,3 +214,30 @@ $('.slide > :first').addClass('active');
 	}, 100));
 
 })();
+
+
+//ES6 Scroll animation
+
+// const target = document.querySelectorAll('[data-anime]');
+// const animationClass = 'animate';
+//
+// function animeScroll(){
+//   const windowTop = window.pageYOffset + (window.innerHeight * 0.75);
+//   target.forEach((element) => {
+//     if(windowTop > element.offsetTop){
+//       element.classList.add(animationClass);
+//     } else {
+//       element.classList.remove(animationClass);
+//     }
+//   });
+// }
+//
+// animeScroll();
+//
+// if(target.length) {
+//   window.addEventListener('scroll', debounce(()=> {
+//     animeScroll();
+//   }, 200));
+// }
+
+
